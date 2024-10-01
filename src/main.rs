@@ -78,6 +78,11 @@ fn main() {
         });
         // print leaderboard
         if old_leaderstring != leader_string {
+            print!("{esc}[H{esc}[48;2;0;0;0m", esc = 27 as char);
+            for row in y..=screen_height {
+                println!("\x1b[{row};0H{}\r", " ".repeat(screen_width as usize),)
+            }
+
             for (i, result) in leader_vec.iter().enumerate() {
                 let name = result.get("name").unwrap().as_str().unwrap().to_string();
                 let time = result.get("time").unwrap().as_f64().unwrap();
