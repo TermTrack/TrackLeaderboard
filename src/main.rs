@@ -22,7 +22,8 @@ fn main() {
     let screen_height = h as u16;
 
     // get level ID:
-    let level_id: String = get_input("level ID: ");
+    // let level_id: String = get_input("level ID: ");
+    let level_id: &str = "showcase3196493566";
     let mut old_leaderstring: String = String::new();
 
     // print background image
