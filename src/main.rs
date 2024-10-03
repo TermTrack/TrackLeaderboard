@@ -88,6 +88,10 @@ fn main() {
                 let time = result.get("time").unwrap().as_f64().unwrap();
                 let loop_threashold = (screen_height - y - 2) as usize;
 
+                if i.div_euclid(loop_threashold) >= 3 {
+                    break;
+                }
+
                 println!(
                     "{esc}[{};{}H{}",
                     y + (i as u16) % loop_threashold as u16,
