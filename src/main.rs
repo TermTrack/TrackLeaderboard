@@ -81,16 +81,21 @@ fn main() {
         if old_leaderstring != leader_string {
             print!("{esc}[H{esc}[48;2;0;0;0m", esc = 27 as char);
             for row in y..=screen_height {
-                println!("\x1b[{row};0H{}\r", " ".repeat(screen_width as usize),)
+                print!("\x1b[{row};0H{}\r", " ".repeat(screen_width as usize),)
             }
 
             for (i, result) in leader_vec.iter().enumerate() {
-                let name = result.get("name").unwrap().as_str().unwrap().to_string();
+                let mut name = result.get("name").unwrap().as_str().unwrap().to_string();
                 let time = result.get("time").unwrap().as_f64().unwrap();
                 let loop_threashold = (screen_height - y - 2) as usize;
+                let max_width = 25;
 
                 if i.div_euclid(loop_threashold) >= 3 {
                     break;
+                }
+
+                if name.len() > max_width {
+                    name = name[0..(max_width as usize - 3)].to_string() + "...";
                 }
 
                 println!(
